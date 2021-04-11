@@ -39,6 +39,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
     mapping(bytes32 => uint256) public balances;
 
     address payable WETH;
+    address aWETH;
 
     constructor(
         address _recipient,
@@ -66,6 +67,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
         repoQuery = _repoQuery;
 
         WETH = 0xf8aC10E65F2073460aAD5f28E1EABE807DC287CF;
+        aWETH = 0x87b1f4cf9BD63f7BBD3eE1aD04E8F52540349347;
     }
 
     function deposit(address user, uint256 amount) public returns (bool) {
