@@ -1,9 +1,11 @@
 pragma solidity ^0.6.0;
 
 import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
+
 import {
     IWETHGateway
-} from "@aave/protocol-v2/contracts/misc/WETHGateway.sol";
+} from "@aave/protocol-v2/contracts/misc/interfaces/IWETHGateway.sol";
+import {IAToken} from "@aave/protocol-v2/contracts/interfaces/IAToken.sol";
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Capped.sol";
@@ -35,7 +37,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
     uint256 private fee;
 
     mapping(bytes32 => uint256) public balances;
-    
+
     address payable WETH;
 
     constructor(
@@ -62,22 +64,17 @@ contract YourContract is ERC20Capped, ChainlinkClient {
 
         fee = 0.1 * 10**18; // 0.1 LINK
         repoQuery = _repoQuery;
-        
+
         WETH = 0xf8aC10E65F2073460aAD5f28E1EABE807DC287CF;
     }
 
-    function deposit(
-        address user,
-        uint256 amount
-    ) public returns (bool) {
+    function deposit(address user, uint256 amount) public returns (bool) {
         IWETHGateway(WETH).depositETH{value: amount}(user, 0);
         return true;
     }
 
-    function withdraw(
-        uint256 amount,
-        address user
-    ) public returns (bool) {
+    function withdraw(uint256 amount, address user) public returns (bool) {
+        IAToken(aWETH).approve(WETH, amount);
         IWETHGateway(WETH).withdrawETH(amount, user);
         return true;
     }
@@ -182,12 +179,16 @@ contract YourContract is ERC20Capped, ChainlinkClient {
         require(msg.value >= 0.001 ether);
         funds[msg.sender] = msg.value;
 
-        deposit(
-            address(this),
-            msg.value
-        );
+        deposit(address(this), msg.value);
 
         _mint(msg.sender, 10000000000000000000);
+    }
+
+    function sponsorWithdrawsFunds(uint256 amount) public {
+        _burn(msg.sender, amount);
+
+        withdraw(amount, address(this));
+        msg.sender.transfer(amount);
     }
 
     function getBalance(address _address) public view returns (uint256) {
@@ -203,6 +204,6 @@ contract YourContract is ERC20Capped, ChainlinkClient {
         require(contributors[_userid] > 0);
         _mint(_address, 1000000000000000000);
     }
-    
-    fallback() external payable { }
+
+    fallback() external payable {}
 }
