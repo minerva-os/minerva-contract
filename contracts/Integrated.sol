@@ -56,9 +56,9 @@ contract YourContract is ERC20Capped, ChainlinkClient {
         linkToRepo = _linkToRepo;
 
         setPublicChainlinkToken();
-        githubOracle = 0x9e308Dd6Cb8DFF70a3FDAF9604Af93BBA9f4B57e;
-        userJobId = "0d840688ccb64ec38790c1a4e65bba46";
-        PrJobId = "4b636dd8bf9342b1bcd148e09f066ba2";
+        githubOracle = 0xbd592254eBe6831090CFd75B78d32Ce1aDDb8DB6;
+        userJobId = "f78e87fd44b54a278dd805c2f75b94ae";
+        PrJobId = "2f01ad3707e34c38b0ea6846f7041afe";
 
         alarmOracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
         alarmJobId = "982105d690504c5d9ce374d040c08654";
@@ -102,7 +102,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
                 address(this),
                 this.fulfillUserId.selector
             );
-        request.add("get", "http://localhost:3000");
+        request.add("get", "http://40.76.23.31/api/");
         request.add("queryParams", repoQuery);
         request.add("path", filter);
 
@@ -116,7 +116,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
                 address(this),
                 this.fulfillPrData.selector
             );
-        request.add("get", "http://localhost:3000");
+        request.add("get", "http://40.76.23.31/api/");
         request.add("queryParams", repoQuery);
         request.add("path", "count");
 
