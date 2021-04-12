@@ -57,8 +57,8 @@ contract YourContract is ERC20Capped, ChainlinkClient {
 
         setPublicChainlinkToken();
         githubOracle = 0xfb831A670D559E8DEBD4b2d42c3AFCEAFD077f25;
-        userJobId = "965926e8e0cd49ef96900549691f0ae3";
-        PrJobId = "cbfc3771aaa64f9483bb94fbe45087ff";
+        userJobId = "f94a1f0ec09847afa0d02b23204ca953";
+        PrJobId = "4def424b391744d8ba45af6ef4243821";
 
         alarmOracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
         alarmJobId = "982105d690504c5d9ce374d040c08654";
