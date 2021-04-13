@@ -64,7 +64,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
         alarmJobId = "982105d690504c5d9ce374d040c08654";
 
         fee = 0.1 * 10**18; // 0.1 LINK
-        repoQuery = _repoQuery;
+        repoQuery = _repoQuery; //user=&repo=
 
         WETH = 0xf8aC10E65F2073460aAD5f28E1EABE807DC287CF;
         aWETH = 0x87b1f4cf9BD63f7BBD3eE1aD04E8F52540349347;
@@ -102,7 +102,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
                 address(this),
                 this.fulfillUserId.selector
             );
-        request.add("get", "http://40.76.23.31/api/");
+        request.add("get", "http://52.188.6.197/");
         request.add("queryParams", repoQuery);
         request.add("path", filter);
 
@@ -116,7 +116,7 @@ contract YourContract is ERC20Capped, ChainlinkClient {
                 address(this),
                 this.fulfillPrData.selector
             );
-        request.add("get", "http://40.76.23.31/api/");
+        request.add("get", "http://52.188.6.197/");
         request.add("queryParams", repoQuery);
         request.add("path", "count");
 
