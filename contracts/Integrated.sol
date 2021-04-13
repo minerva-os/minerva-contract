@@ -60,8 +60,8 @@ contract YourContract is ERC20Capped, ChainlinkClient {
         userJobId = "f94a1f0ec09847afa0d02b23204ca953";
         PrJobId = "4def424b391744d8ba45af6ef4243821";
 
-        alarmOracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
-        alarmJobId = "982105d690504c5d9ce374d040c08654";
+        alarmOracle = 0xF405B99ACa8578B9eb989ee2b69D518aaDb90c1F;
+        alarmJobId = "a13ad0518c9d4ffdbdbd5bf745aefe02";
 
         fee = 0.1 * 10**18; // 0.1 LINK
         repoQuery = _repoQuery; //user=&repo=
